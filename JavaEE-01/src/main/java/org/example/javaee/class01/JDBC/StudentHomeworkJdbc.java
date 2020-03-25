@@ -11,22 +11,22 @@ import java.util.List;
 public class StudentHomeworkJdbc {
 
     public static List<StudentHomework> selectAll(){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+       // String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+        //String driverName = "com.mysql.cj.jdbc.Driver";
 
-        String driverName = "com.mysql.cj.jdbc.Driver";
 
         String  sqlString = "select * from s_student_homework";
-        try {
+      /*  try {
             //加载驱动
             Class.forName(driverName);
 
         }catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
 
         List<StudentHomework> list = new ArrayList<>();
 
-        try(Connection connection = DriverManager.getConnection(url,"root","990619")){
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()){
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     while(resultSet.next()){
@@ -49,22 +49,13 @@ public class StudentHomeworkJdbc {
         return list;
     }
     public static List<Student> selectAllStudent(){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
 
-        String driverName = "com.mysql.cj.jdbc.Driver";
 
         String  sqlString = "select * from s_student";
-        try {
-            //加载驱动
-            Class.forName(driverName);
-
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         List<Student> list = new ArrayList<>();
 
-        try(Connection connection = DriverManager.getConnection(url,"root","990619")){
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()){
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     while(resultSet.next()){
@@ -84,22 +75,14 @@ public class StudentHomeworkJdbc {
         return list;
     }
     public static List<Homework> selectAllHomework(){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
 
-        String driverName = "com.mysql.cj.jdbc.Driver";
 
         String  sqlString = "select * from s_homework";
-        try {
-            //加载驱动
-            Class.forName(driverName);
 
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         List<Homework> list = new ArrayList<>();
 
-        try(Connection connection = DriverManager.getConnection(url,"root","990619")){
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()){
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     while(resultSet.next()){
@@ -120,19 +103,11 @@ public class StudentHomeworkJdbc {
         return list;
     }
     public boolean addHomework(Homework hw) {
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
 
-        String driverName = "com.mysql.cj.jdbc.Driver";
         String sql = "INSERT INTO `school`.`s_homework`(`id`,`title`,`content`,`create_time`,`update_time`) VALUES (?,?,?,?,?)";
 
-        try {
-            //加载驱动
-            Class.forName(driverName);
 
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try(Connection connection = DriverManager.getConnection(url,"root","990619")){
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()){
             PreparedStatement ps =  connection.prepareStatement(sql);
             ps.setLong(1,hw.getId());
             ps.setString(2,hw.getTitle());
@@ -149,19 +124,11 @@ public class StudentHomeworkJdbc {
     }
 
     public boolean addStudent(Student stu) {
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
 
-        String driverName = "com.mysql.cj.jdbc.Driver";
         String sql = "INSERT INTO `school`.`s_student`(`id`,`name`,`create_time`,`update_time`) VALUES (?,?,?,?)";
 
-        try {
-            //加载驱动
-            Class.forName(driverName);
 
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try(Connection connection = DriverManager.getConnection(url,"root","990619")){
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()){
             PreparedStatement ps =  connection.prepareStatement(sql);
             ps.setLong(1,stu.getId());
             ps.setString(2,stu.getName());
@@ -177,19 +144,11 @@ public class StudentHomeworkJdbc {
     }
 
     public boolean submitHomework(StudentHomework studentHomework) {
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
 
-        String driverName = "com.mysql.cj.jdbc.Driver";
         String sql = "INSERT INTO `school`.`s_student_homework`(`id`,`student_id`,`homework_id`,`homework_title`,`homework_content`,`create_time`,`update_time`) VALUES (?,?,?,?,?,?,?)";
 
-        try {
-            //加载驱动
-            Class.forName(driverName);
 
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try(Connection connection = DriverManager.getConnection(url,"root","990619")){
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()){
             PreparedStatement ps =  connection.prepareStatement(sql);
             ps.setLong(1,studentHomework.getId());
             ps.setLong(2,studentHomework.getStudentId());
@@ -208,9 +167,7 @@ public class StudentHomeworkJdbc {
     }
 
     public boolean isExistStudent(Long id){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
 
-        String driverName = "com.mysql.cj.jdbc.Driver";
 
         String sql = "SELECT * from `school`.`s_student` where id = ? ";
         boolean flag = false;
@@ -218,10 +175,7 @@ public class StudentHomeworkJdbc {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            //加载驱动
-            Class.forName(driverName);
-            //创建连接
-            connection = DriverManager.getConnection(url,"root","990619");
+            connection = DatabasePool.getHikariDataSource().getConnection();
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setLong(1,id);
             resultSet = preparedStatement.executeQuery();
@@ -229,8 +183,6 @@ public class StudentHomeworkJdbc {
             if(resultSet.next()){
                 flag = true;
             }
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -260,9 +212,6 @@ public class StudentHomeworkJdbc {
     }
 
     public boolean isExistHomework(Long id){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
-
-        String driverName = "com.mysql.cj.jdbc.Driver";
 
         String sql = "SELECT * from `school`.`s_homework` where id = ? ";
         boolean flag = false;
@@ -270,10 +219,8 @@ public class StudentHomeworkJdbc {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            //加载驱动
-            Class.forName(driverName);
-            //创建连接
-            connection = DriverManager.getConnection(url,"root","990619");
+
+            connection = DatabasePool.getHikariDataSource().getConnection();
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setLong(1,id);
             resultSet = preparedStatement.executeQuery();
@@ -281,8 +228,6 @@ public class StudentHomeworkJdbc {
             if(resultSet.next()){
                 flag = true;
             }
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
