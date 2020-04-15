@@ -1,7 +1,16 @@
-package org.example.spring.mvc.model;
+package org.example.spring.mvc.bean;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * @author Jinchenyu
+ */
+@Configuration
+@Scope("prototype")
 public class Homework {
 
    private Long id;

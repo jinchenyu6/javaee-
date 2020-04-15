@@ -1,27 +1,43 @@
 package org.example.spring.mvc.controller;
 
 import org.example.spring.mvc.bean.bean1;
-import org.example.spring.mvc.model.StudentHomework;
+import org.example.spring.mvc.bean.StudentHomework;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 /*@RequestMapping("/Student/")*/
 public class StudentController extends HttpServlet {
-    @RequestMapping("/submitHomework")
-    public void SubmitHomeworkServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
+
+    /**
+     * @RequestMapping(value = "submitHomework",method = RequestMethod.GET)等价于
+     *    @GetMapping("submitHomework")
+     */
+
+    @ResponseBody
+    public Object testMapping(@RequestBody Object request, @RequestParam(required = true) String id){
+        //HttpServletRequest 获取Body ------> request
+
+        //Object ------> HttpServletResponse
+        return new Object();
+    }
+
+
+    @RequestMapping("/submitHomework")  /**会映射到 StudentController.SubmitHomeworkServlet()*/
+    public void SubmitHomeworkServlet(@RequestParam(value = "id")Long id,
+                                      @RequestParam(value = "studentId")Long studentId,
+                                      @RequestParam(value = "homeworkId")Long homeworkId,
+                                      @RequestParam(value = "homeworkTitle")String homeworkTitle,
+                                      @RequestParam(value = "homeworkContent")String homeworkContent) throws UnsupportedEncodingException {
+  /*      Long id = Long.parseLong(req.getParameter("id"));
         Long studentId = Long.parseLong(req.getParameter("studentId"));
         Long homeworkId = Long.parseLong(req.getParameter("homeworkId"));
         String homeworkTitle = req.getParameter("homeworkTitle");
         String homeworkContent = req.getParameter("homeworkContent");
-
+*/
         bean1 submitHw = new bean1();
         if (submitHw.isExistStudent(studentId)) {
             if (submitHw.isExistHomework(homeworkId)) {

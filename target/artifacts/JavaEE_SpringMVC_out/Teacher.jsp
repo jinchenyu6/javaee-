@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.spring.mvc.model.Student" %>
-<%@ page import="org.example.spring.mvc.bean.bean1" %>
-<%@ page import="org.example.spring.mvc.model.StudentHomework" %>
+<%@ page import="org.example.spring.mvc.bean.Student" %>
+<%@ page import="org.example.spring.mvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.example.spring.mvc.bean.StudentHomework" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -41,7 +41,7 @@
         <td>添加时间</td>
     </tr>
     <%
-        List<Student> list = (List<Student>) bean1.selectAllStudent();
+        List<Student> list = (List<Student>) StudentHomeworkJdbc.selectAllStudent();
         if(null == list || list.size()<=0){
             out.println("No data.");
         }else{
@@ -90,7 +90,7 @@
 
     </tr>
     <%
-        List<StudentHomework> list2 = (List<StudentHomework>) bean1.selectAll();
+        List<StudentHomework> list2 = (List<StudentHomework>) StudentHomeworkJdbc.selectAll();
         if(null == list || list.size()<=0){
             out.println("No data.");
         }else{

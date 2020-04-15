@@ -1,7 +1,7 @@
 
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.spring.mvc.model.StudentHomework" %>
-<%@ page import="org.example.spring.mvc.bean.bean1" %>
+<%@ page import="org.example.spring.mvc.bean.StudentHomework" %>
+<%@ page import="org.example.spring.mvc.jdbc.StudentHomeworkJdbc" %>
 <%--
   Created by IntelliJ IDEA.
   User: DELL
@@ -26,7 +26,7 @@
 
     </tr>
     <%
-      List<StudentHomework> list = (List<StudentHomework>) bean1.selectAll();
+      List<StudentHomework> list = (List<StudentHomework>) StudentHomeworkJdbc.selectAll();
       if(null == list || list.size()<=0){
         out.println("No data.");
       }else{

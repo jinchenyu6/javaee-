@@ -1,9 +1,9 @@
 package org.example.spring.mvc.controller;
 
 import org.example.spring.mvc.bean.bean1;
-import org.example.spring.mvc.model.Homework;
-import org.example.spring.mvc.model.Student;
-import org.example.spring.mvc.model.StudentHomework;
+import org.example.spring.mvc.bean.Homework;
+import org.example.spring.mvc.bean.Student;
+import org.example.spring.mvc.bean.StudentHomework;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

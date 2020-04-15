@@ -2,9 +2,10 @@ package org.example.spring.mvc.jdbc;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 public class DatabasePool {
 
     private static HikariDataSource hikariDataSource;

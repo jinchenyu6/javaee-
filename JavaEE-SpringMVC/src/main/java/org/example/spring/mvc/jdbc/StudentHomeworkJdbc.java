@@ -1,17 +1,35 @@
 package org.example.spring.mvc.jdbc;
 
-
-import org.example.spring.mvc.model.Homework;
-import org.example.spring.mvc.model.Student;
-import org.example.spring.mvc.model.StudentHomework;
+import org.example.spring.mvc.bean.Homework;
+import org.example.spring.mvc.bean.Student;
+import org.example.spring.mvc.bean.StudentHomework;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-@Component
+@Configuration
 
 public class StudentHomeworkJdbc {
+    private static ApplicationContext contextSh;
+    static {
+        contextSh = new AnnotationConfigApplicationContext(StudentHomework.class);
+    }
+
+    private static ApplicationContext contextS;
+    static {
+        contextS = new AnnotationConfigApplicationContext(Student.class);
+    }
+
+    private static ApplicationContext contextH;
+    static {
+        contextH = new AnnotationConfigApplicationContext(Homework.class);
+    }
+
+
 
     public static List<StudentHomework> selectAll(){
 
@@ -24,7 +42,7 @@ public class StudentHomeworkJdbc {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     while(resultSet.next()){
-                        StudentHomework sh = new StudentHomework();
+                        StudentHomework sh = (StudentHomework) contextSh.getBean("studentHomework");
                         sh.setId(resultSet.getLong("id"));
                         sh.setStudentId(resultSet.getLong("student_id"));
                         sh.setHomeworkId(resultSet.getLong("homework_id"));
@@ -53,7 +71,7 @@ public class StudentHomeworkJdbc {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     while(resultSet.next()){
-                        Student stu = new Student();
+                        Student stu = (Student) contextS.getBean("student");
                         stu.setId(resultSet.getLong("id"));
                         stu.setName(resultSet.getString("name"));
                         stu.setCreate_time(resultSet.getTimestamp("create_time"));
@@ -80,7 +98,7 @@ public class StudentHomeworkJdbc {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     while(resultSet.next()){
-                        Homework hw = new Homework();
+                        Homework hw = (Homework) contextH.getBean("homework");
                         hw.setId(resultSet.getLong("id"));
                         hw.setTitle(resultSet.getString("title"));
                         hw.setContent(resultSet.getString("content"));

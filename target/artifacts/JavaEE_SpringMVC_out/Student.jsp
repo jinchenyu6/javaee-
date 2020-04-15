@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.spring.mvc.model.Homework" %>
-<%@ page import="org.example.spring.mvc.bean.bean1" %>
-<%@ page import="org.example.spring.mvc.model.Student" %>
+<%@ page import="org.example.spring.mvc.bean.Homework" %>
+<%@ page import="org.example.spring.mvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.example.spring.mvc.bean.Student" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><%--
   Created by IntelliJ IDEA.
   User: DELL
@@ -24,7 +24,7 @@
         <td>创建时间</td>
     </tr>
     <%
-        List<Homework> list = (List<Homework>) bean1.selectAllHomework();
+        List<Homework> list = (List<Homework>) StudentHomeworkJdbc.selectAllHomework();
         if(null == list || list.size()<=0){
             out.println("No data.");
         }else{
@@ -48,7 +48,7 @@
         <td>添加时间</td>
     </tr>
     <%
-        List<Student> list2 = (List<Student>) bean1.selectAllStudent();
+        List<Student> list2 = (List<Student>) StudentHomeworkJdbc.selectAllStudent();
         if(null == list || list.size()<=0){
             out.println("No data.");
         }else{
