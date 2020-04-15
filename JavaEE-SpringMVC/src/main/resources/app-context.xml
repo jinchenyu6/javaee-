@@ -10,8 +10,6 @@
     <bean id = "dbPool" class="org.example.spring.mvc.jdbc.DatabasePool"></bean>
 
     <context:component-scan base-package="org.example.spring.mvc.bean"></context:component-scan>
-    <context:component-scan base-package="org.example.spring.mvc.model"></context:component-scan>
-    <context:component-scan base-package="org.example.spring.mvc.aspect"></context:component-scan>
     <context:component-scan base-package="org.example.spring.mvc.jdbc"></context:component-scan>
 
 

@@ -1,6 +1,6 @@
 package org.example.spring.mvc.controller;
 
-import org.example.spring.mvc.bean.bean1;
+import org.example.spring.mvc.jdbc.StudentHomeworkJdbc;
 import org.example.spring.mvc.bean.Homework;
 import org.example.spring.mvc.bean.Student;
 import org.example.spring.mvc.bean.StudentHomework;
@@ -28,7 +28,7 @@ public class TeacherController  extends HttpServlet {
         hw.setId(id);
         hw.setTitle(new String(title.getBytes("ISO-8859-1"), "UTF-8"));
         hw.setContent(new String(content.getBytes("ISO-8859-1"), "UTF-8"));
-        bean1 add = new bean1();
+        StudentHomeworkJdbc add = new StudentHomeworkJdbc();
         add.addHomework(hw);
     }
 
@@ -41,13 +41,13 @@ public class TeacherController  extends HttpServlet {
         Student stu = new Student();
         stu.setId(id);
         stu.setName(new String(name.getBytes("ISO-8859-1"), "UTF-8"));
-        bean1 addStu = new bean1();
+        StudentHomeworkJdbc addStu = new StudentHomeworkJdbc();
         addStu.addStudent(stu);
     }
 
     @RequestMapping("/list")
     public void StudentHomeworkServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<StudentHomework> list = bean1.selectAll();
+        List<StudentHomework> list = StudentHomeworkJdbc.selectAll();
 
         req.setAttribute("list",list);
 

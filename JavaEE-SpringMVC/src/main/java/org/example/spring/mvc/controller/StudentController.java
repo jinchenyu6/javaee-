@@ -1,6 +1,6 @@
 package org.example.spring.mvc.controller;
 
-import org.example.spring.mvc.bean.bean1;
+import org.example.spring.mvc.jdbc.StudentHomeworkJdbc;
 import org.example.spring.mvc.bean.StudentHomework;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +38,7 @@ public class StudentController extends HttpServlet {
         String homeworkTitle = req.getParameter("homeworkTitle");
         String homeworkContent = req.getParameter("homeworkContent");
 */
-        bean1 submitHw = new bean1();
+        StudentHomeworkJdbc submitHw = new StudentHomeworkJdbc();
         if (submitHw.isExistStudent(studentId)) {
             if (submitHw.isExistHomework(homeworkId)) {
                 StudentHomework sh = new StudentHomework();
