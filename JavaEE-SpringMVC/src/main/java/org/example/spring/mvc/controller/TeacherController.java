@@ -18,7 +18,7 @@ import java.util.List;
 /*@RequestMapping("/Teacher/")*/
 public class TeacherController  extends HttpServlet {
     @RequestMapping("/add")
-    public void AddStudentHomeworkServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void AddStudentHomework(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Long.parseLong(req.getParameter("id"));
         String title = req.getParameter("title");
         String content = req.getParameter("content");
@@ -33,7 +33,7 @@ public class TeacherController  extends HttpServlet {
     }
 
     @RequestMapping("/addStu")
-    public void AddStudentServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void AddStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Long.parseLong(req.getParameter("id"));
         String name = req.getParameter("name");
 
@@ -46,7 +46,7 @@ public class TeacherController  extends HttpServlet {
     }
 
     @RequestMapping("/list")
-    public void StudentHomeworkServlet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void StudentHomework(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<StudentHomework> list = StudentHomeworkJdbc.selectAll();
 
         req.setAttribute("list",list);

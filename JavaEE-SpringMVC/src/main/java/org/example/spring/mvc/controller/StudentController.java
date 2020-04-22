@@ -26,8 +26,8 @@ public class StudentController extends HttpServlet {
     }
 
 
-    @RequestMapping("/submitHomework")  /**会映射到 StudentController.SubmitHomeworkServlet()*/
-    public void SubmitHomeworkServlet(@RequestParam(value = "id")Long id,
+    @RequestMapping("/submitHomework")  /**会映射到 StudentController.SubmitHomework()*/
+    public void SubmitHomework(@RequestParam(value = "id")Long id,
                                       @RequestParam(value = "studentId")Long studentId,
                                       @RequestParam(value = "homeworkId")Long homeworkId,
                                       @RequestParam(value = "homeworkTitle")String homeworkTitle,

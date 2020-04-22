@@ -5,12 +5,16 @@ import org.example.spring.mvc.bean.Student;
 import org.example.spring.mvc.bean.StudentHomework;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author DELL
+ */
 @Configuration
 
 public class StudentHomeworkJdbc {
@@ -29,6 +33,9 @@ public class StudentHomeworkJdbc {
         contextH = new AnnotationConfigApplicationContext(Homework.class);
     }
 
+    public StudentHomeworkJdbc getStudentHomeworkJdbc(){
+        return new StudentHomeworkJdbc();
+    }
 
 
     public static List<StudentHomework> selectAll(){
@@ -269,10 +276,5 @@ public class StudentHomeworkJdbc {
     }
 
 
-    public static void main(String[] args) {
-        List<StudentHomework> list = selectAll();
-        for(StudentHomework sh : list){
-            System.out.println(sh.getHomeworkContent());
-        }
-    }
+
 }
