@@ -1,0 +1,11 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: eureka-consumer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka # 指定服务注册中心
